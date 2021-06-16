@@ -1,0 +1,3 @@
+title=screens
+author=Manuel Tijerina 
+orientation=landscape

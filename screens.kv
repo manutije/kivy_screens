@@ -1,0 +1,73 @@
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+
+Sm:
+
+<Screen_one@Screen>:
+    BoxLayout:
+        orientation: "vertical"
+        Button:
+            text: "Login"
+        Button:
+            text: "Sign Up"
+            on_press:  
+                app.root.current = "two"
+                app.root.transition.direction = 'down'
+
+<Screen_two@Screen>:
+    GridLayout:
+        cols: 2
+
+        Label:
+            text: "Type a username"
+            size_hint: .5, None
+            height: "30dp"
+        TextInput:
+            multiline: False
+            size_hint: 1, None
+            height: "30dp"
+
+            
+        Label:
+            text: "Type a password"
+            size_hint: .5, None
+            height: "30dp"
+        TextInput:
+            multiline: False
+            password: True
+            size_hint: 1, None
+            height: "30dp"
+            
+        Label:
+            text: "Type your email"
+            size_hint: .5, None
+            height: "30dp"
+        TextInput:
+            multiline: False
+            size_hint: 1, None
+            height: "30dp"
+
+        Button:
+            text: "Register"
+            size_hint: .5, None
+            height: "60dp"
+            
+        Button:
+            text: "Go back"
+            size_hint: 1, None
+            height: "60dp"
+            on_press: 
+                app.root.current = "one"
+                app.root.transition.direction = 'up'
+                    
+
+<Sm@ScreenManager>:
+    Screen_one:
+        id: one
+        name: "one"
+        manager: 'Sm'
+    Screen_two:
+        id: two
+        name: "two"
+        manager: 'Sm'
+
+
