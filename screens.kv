@@ -7,13 +7,120 @@ Sm:
         orientation: "vertical"
         Button:
             text: "Login"
-        Button:
-            text: "Sign Up"
-            on_press:  
-                app.root.current = "two"
+            font_name: "fonts/font_1.ttf"
+            font_size: "50dp"
+            size_hint: 1, None
+            height: "90dp"
+            on_press:
+                app.root.current = "four"
                 app.root.transition.direction = 'down'
+        Image:
+            source: "images/logo.png"
 
-<Screen_two@Screen>:
+
+
+<Screen_four>:
+    id: four
+    GridLayout:
+        cols: 2
+        Label:
+            text: "USERNAME: "
+            font_name: "fonts/font_1.ttf"
+            font_size: "30dp"
+            size_hint: .5, None
+            height: "60dp"
+        TextInput:
+            id: username_l
+            font_name: "fonts/font_1.ttf"
+            font_size: "30dp"
+            multiline: False
+            size_hint: 1, None
+            height: "60dp"
+            write_tab: False
+
+            
+        Label:
+            text: "PASSWORD: "
+            font_name: "fonts/font_1.ttf"
+            font_size: "30dp"
+            size_hint: .5, None
+            height: "60dp"
+        TextInput:
+            id: password_l
+            font_name: "fonts/font_1.ttf"
+            font_size: "30dp"
+            multiline: False
+            password: True
+            size_hint: 1, None
+            height: "60dp"
+            write_tab: False
+
+        Button:
+            text: "Login"
+            font_name: "fonts/font_1.ttf"
+            font_size: "50dp"
+            size_hint: .5, None
+            height: "90dp"
+            on_press:
+                root.login_user(username_l,password_l)
+        
+        Button:
+            text: "Go back"
+            font_name: "fonts/font_1.ttf"
+            font_size: "50dp"
+            size_hint: 1, None
+            height: "90dp"
+            on_press: 
+                app.root.current = "one"
+                app.root.transition.direction = 'up'
+
+<Screen_three>:
+    AnchorLayout: 
+        anchor_x: "center"
+        anchor_y: "top"
+        GridLayout:
+            rows:2
+            StackLayout:
+                Button:
+                    size_hint: .2, None
+                    height: "60dp"
+                    text: "Register User"
+                    on_press: 
+                        app.root.current = "two"
+                        app.root.transition.direction = 'up'
+                Button:
+                    size_hint: .2, None
+                    height: "60dp"
+                    text: "Clothes"
+                Button:
+                    size_hint: .2, None
+                    height: "60dp"
+                    text: "Food"
+                Button:
+                    size_hint: .2, None
+                    height: "60dp"
+                    text: "Expenses"
+                Button:
+                    size_hint: .2, None
+                    height: "60dp"
+                    text: "Log Out"
+                    on_press:
+                        app.root.current = "four"
+                        app.root.transition.direction = 'up'
+            Label:
+                size_hint: 1, None
+                height: "60dp"
+                font_name: "fonts/font_2.ttf"
+                font_size: "40dp"
+                text: root.namer
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+        Image:
+            source: "images/logo.png"
+            size_hint: .7,.7
+
+<Screen_two>:
     GridLayout:
         cols: 2
 
@@ -22,9 +129,11 @@ Sm:
             size_hint: .5, None
             height: "30dp"
         TextInput:
+            id: username
             multiline: False
             size_hint: 1, None
             height: "30dp"
+            write_tab: False
 
             
         Label:
@@ -32,35 +141,43 @@ Sm:
             size_hint: .5, None
             height: "30dp"
         TextInput:
+            id: password
             multiline: False
             password: True
             size_hint: 1, None
             height: "30dp"
+            write_tab: False
             
         Label:
             text: "Type your email"
             size_hint: .5, None
             height: "30dp"
         TextInput:
+            id:email
             multiline: False
             size_hint: 1, None
             height: "30dp"
+            write_tab: False
 
         Button:
             text: "Register"
             size_hint: .5, None
             height: "60dp"
+            on_press:
+                root.register_user(username,password,email)
+                app.root.current = "three"
+                app.root.transition.direction = 'up'
             
         Button:
-            text: "Go back"
+            text: "Go Back"
             size_hint: 1, None
             height: "60dp"
             on_press: 
-                app.root.current = "one"
-                app.root.transition.direction = 'up'
+                app.root.current = "three"
+                app.root.transition.direction = 'down'
                     
 
-<Sm@ScreenManager>:
+<Sm>:
     Screen_one:
         id: one
         name: "one"
@@ -69,5 +186,14 @@ Sm:
         id: two
         name: "two"
         manager: 'Sm'
+    Screen_three:
+        id: three
+        name: "three"
+        manager: 'Sm'
+    Screen_four:
+        id: four
+        name: "four"
+        manager: 'Sm'
+
 
 
